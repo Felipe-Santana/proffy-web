@@ -8,7 +8,7 @@ import Textarea from "../../components/Textarea";
 import warningIcon from "../../assets/images/icons/warning.svg";
 import Select from "../../components/Select";
 
-import { subjects } from "../../utils/selectData";
+import { subjects, week_days } from "../../utils/selectData";
 
 function TeacherForm() {
   return (
@@ -26,10 +26,23 @@ function TeacherForm() {
           <Input label="WhatsApp" name="whatsapp" />
           <Textarea label="Biografia" name="bio" />
         </fieldset>
+
         <fieldset>
           <legend>Sobre a aula</legend>
           <Select label="Matéria" name="subject" options={subjects} />
           <Input label="Custo da sua hora por aula" name="cost" />
+        </fieldset>
+
+        <fieldset>
+          <legend>
+            Horários disponíveis <button type="button"> + Novo horário</button>
+          </legend>
+
+          <div className="schedule-item">
+            <Select name="week_day" label="Dia da semana" options={week_days} />
+            <Input name="from" label="Das" type="time" />
+            <Input name="to" label="Até" type="time" />
+          </div>
         </fieldset>
 
         <footer>
