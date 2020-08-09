@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./styles.css";
 import PageHeader from "../../components/PageHeader";
@@ -11,6 +11,21 @@ import Select from "../../components/Select";
 import { subjects, week_days } from "../../utils/selectData";
 
 function TeacherForm() {
+  const [scheduleItems, setScheduleItems] = useState([
+    { week_day: 0, from: "", to: "" },
+  ]);
+
+  function addNewScheduleItem() {
+    setScheduleItems([
+      ...scheduleItems,
+      {
+        week_day: 0,
+        from: "",
+        to: "",
+      },
+    ]);
+  }
+
   return (
     <div id="page-teacher-form" className="container">
       <PageHeader
@@ -35,14 +50,25 @@ function TeacherForm() {
 
         <fieldset>
           <legend>
-            Horários disponíveis <button type="button"> + Novo horário</button>
+            Horários disponíveis
+            <button type="button" onClick={addNewScheduleItem}>
+              + Novo horário
+            </button>
           </legend>
 
-          <div className="schedule-item">
-            <Select name="week_day" label="Dia da semana" options={week_days} />
-            <Input name="from" label="Das" type="time" />
-            <Input name="to" label="Até" type="time" />
-          </div>
+          {scheduleItems.map((scheduleItem) => {
+            return (
+              <div key={scheduleItem.week_day} className="schedule-item">
+                <Select
+                  name="week_day"
+                  label="Dia da semana"
+                  options={week_days}
+                />
+                <Input name="from" label="Das" type="time" />
+                <Input name="to" label="Até" type="time" />
+              </div>
+            );
+          })}
         </fieldset>
 
         <footer>
