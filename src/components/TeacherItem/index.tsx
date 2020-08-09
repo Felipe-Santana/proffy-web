@@ -3,36 +3,41 @@ import whatsappIcon from "../../assets/images/icons/whatsapp.svg";
 
 import "./styles.css";
 
-const TeacherItem: React.FC = () => {
+export interface Teacher {
+  id: number;
+  subject: string;
+  cost: number;
+  name: string;
+  avatar: string;
+  whatsapp: string;
+  bio: string;
+}
+interface TeacherItemProps {
+  teacher: Teacher;
+}
+
+const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
   return (
     <article className="teacher-item">
       <header>
-        <img
-          src="https://icons.iconseeker.com/png/fullsize/harry-potter-1/harrypotter4.png"
-          alt="Alvo Dumbledore"
-        />
+        <img src={teacher.avatar} alt={teacher.name} />
         <div>
-          <strong>Alvo Dumbledore</strong>
-          <span>Feitiços</span>
+          <strong>{teacher.name}</strong>
+          <span>{teacher.subject}</span>
         </div>
       </header>
 
-      <p>
-        Alvo Dumbledore jamais demonstrava orgulho ou vaidade, sempre encontrava
-        o que elogiar em qualquer pessoa, por mais insignificante ou miserável
-        que fosse, e acredito que as perdas que sofreu na juventude o dotaram de
-        grande humildade e solidariedade.
-      </p>
+      <p>{teacher.bio}</p>
 
       <footer>
         <p>
           Preço/hora
-          <strong>R$ 5000,00</strong>
+          <strong>R$ {teacher.cost}</strong>
         </p>
-        <button type="button">
+        <a href={`https://wa.me/${teacher.whatsapp}`}>
           <img src={whatsappIcon} alt="Whatsapp" />
           Entrar em contato
-        </button>
+        </a>
       </footer>
     </article>
   );
